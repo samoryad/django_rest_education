@@ -1,8 +1,10 @@
 from rest_framework.serializers import ModelSerializer
-from .models import User
+from .models import ToDoUser
 
 
 class UserModelSerializer(ModelSerializer):
+    """сериализатор для пользователя ToDoUser"""
     class Meta:
-        model = User
-        fields = ('user_name', 'first_name', 'last_name', 'email')
+        model = ToDoUser
+        fields = ('username', 'first_name', 'last_name', 'email')
+        # fields = '__all__'
