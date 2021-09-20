@@ -2,6 +2,8 @@ import './App.css';
 import React from "react";
 import UserList from "./components/Users";
 import axios from "axios";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 class App extends React.Component {
     constructor(props) {
@@ -27,7 +29,9 @@ class App extends React.Component {
     render() {
         return (
             <div>
+                <Header/>
                 <UserList users = {this.state.users}/>
+                <Footer/>
             </div>
         )
     }
