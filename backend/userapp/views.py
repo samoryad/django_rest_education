@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from rest_framework.viewsets import ModelViewSet
+from .models import ToDoUser
+from .serializers import UserModelSerializer
 
-# Create your views here.
+
+class ToDoUserViewSet(ModelViewSet):
+    serializer_class = UserModelSerializer
+    queryset = ToDoUser.objects.all()

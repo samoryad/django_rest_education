@@ -17,14 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from library.views import AuthorViewSet
+from userapp.views import ToDoUserViewSet
 
 router = DefaultRouter()
 router.register('authors', AuthorViewSet)
+router.register('user', ToDoUserViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # из методички:
-    path('api-auth/', include('rest_framework.urls')),
-    # с урока:
-    path('api/', include(router.urls))
+    path('api/', include(router.urls)),
 ]
