@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'library',
     'userapp',
+    'todoapp',
 ]
 
 CORS_ALLOWED_ORIGINS = [
