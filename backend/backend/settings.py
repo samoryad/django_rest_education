@@ -51,7 +51,10 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.BrowsableAPIRenderer',
         # 'djangorestframework_camel_case.render.CamelCaseJSONRenderer',
         # 'djangorestframework_camel_case.render.CamelCaseBrowsableAPIRenderer',
-    ]
+    ],
+    'DEFAULT_PAGINATION_CLASS':
+        'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 100,
 }
 
 CORS_ALLOWED_ORIGINS = [
