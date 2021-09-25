@@ -5,7 +5,6 @@ from .models import ToDo, Project
 
 class ProjectSerializer(ModelSerializer):
     """сериализатор для проектов"""
-    users = StringRelatedField(many=True)
 
     class Meta:
         model = Project
