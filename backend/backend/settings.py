@@ -41,7 +41,18 @@ INSTALLED_APPS = [
     'corsheaders',
     'library',
     'userapp',
+    'todoapp',
 ]
+
+# настройки рендереров для rest
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+        # 'djangorestframework_camel_case.render.CamelCaseJSONRenderer',
+        # 'djangorestframework_camel_case.render.CamelCaseBrowsableAPIRenderer',
+    ]
+}
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
