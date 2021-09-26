@@ -3,7 +3,7 @@ from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from .filters import ProjectFilter
+from .filters import ProjectFilter, ToDoFilter
 from .models import Project, ToDo
 from .serializers import ProjectSerializer, ToDoSerializer
 
@@ -37,7 +37,7 @@ class ToDoModelViewSet(ModelViewSet):
     serializer_class = ToDoSerializer
     queryset = ToDo.objects.all()
     pagination_class = ToDoLimitOffsetPagination
-    filterset_fields = ['project']
+    filterset_class = ToDoFilter
 
     # переопределяем метод destroy (вместо удаления - не активно)
     def destroy(self, request, *args, **kwargs):
