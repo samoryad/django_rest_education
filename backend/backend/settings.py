@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'library',
     'userapp',
     'todoapp',
+    'django_filters',
 ]
 
 # настройки рендереров для rest
@@ -52,9 +53,13 @@ REST_FRAMEWORK = {
         # 'djangorestframework_camel_case.render.CamelCaseJSONRenderer',
         # 'djangorestframework_camel_case.render.CamelCaseBrowsableAPIRenderer',
     ],
+    # ограничение пагинации
     'DEFAULT_PAGINATION_CLASS':
         'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 100,
+    # подключение библиотеки django-filter
+    'DEFAULT_FILTER_BACKENDS':
+        ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
 CORS_ALLOWED_ORIGINS = [
