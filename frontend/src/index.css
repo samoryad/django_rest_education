@@ -37,13 +37,20 @@ code {
 }
 
 .table {
-    background-color: #434445;
+    background-color: #a3a5a7;
     width: 100%;
     float: left;
     height: 140px;
     text-align: center;
-    color: #a4a4a4;
+    color: #9a341b;
     font-size: 20px;
     font-weight: 100;
     line-height: 100px;
+    margin: 0 auto;
+}
+
+.nav {
+    background-color: #a3a5a7;
+    margin: 0 auto;
+    display: block;
 }

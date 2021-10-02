@@ -4,9 +4,17 @@ import UserList from "./components/Users";
 import axios from "axios";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import {HashRouter, Link, Route, Switch} from 'react-router-dom';
+import {
+    BrowserRouter,
+    // HashRouter,
+    Link,
+    Redirect,
+    Route,
+    Switch
+} from 'react-router-dom';
 import ProjectList from "./components/Projects";
 import TodoList from "./components/TodoNotices";
+import ToDoFilteredList from "./components/TodoFiltered";
 
 const NotFound404 = ({ location }) => {
   return (
@@ -64,8 +72,9 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <HashRouter>
-                    <nav>
+                <BrowserRouter>
+                    <Header/>
+                    <nav className="nav">
                         <ul>
                             <li>
                                 <Link to='/'>Users</Link>
@@ -78,16 +87,17 @@ class App extends React.Component {
                             </li>
                         </ul>
                     </nav>
-                    <Header/>
                     <Switch>
-                    <Route exact path='/' component={() => <UserList users = {this.state.users} />}  />
-                    <Route exact path='/projects' component={() => <ProjectList projects = {this.state.projects} />}  />
-                    <Route exact path='/todos' component={() => <TodoList todos = {this.state.todos} />}  />
-                    <Route component={NotFound404} />
-                    {/*<UserList users = {this.state.users}/>*/}
+                        <Route exact path='/' component={() => <UserList users = {this.state.users} />}  />
+                        <Route exact path='/projects' component={() => <ProjectList projects = {this.state.projects} />}  />
+                        <Route exact path='/todos' component={() => <TodoList todos = {this.state.todos} />}  />
+                        <Redirect from='/users' to='/' />
+                        <Route exact path='/projects/:name' component={() => <ToDoFilteredList todos = {this.state.todos} />}  />
+                        <Route component={NotFound404} />
+                        {/*<UserList users = {this.state.users}/>*/}
                     </Switch>
                     <Footer/>
-                </HashRouter>
+                </BrowserRouter>
             </div>
         )
     }
