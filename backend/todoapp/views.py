@@ -22,7 +22,8 @@ class ProjectModelViewSet(ModelViewSet):
     pagination_class = ProjectLimitOffsetPagination
     filterset_class = ProjectFilter
 
-    # для себя оставил (без подключения django-filter) через параметры запроса
+    # для себя оставил (фильтрация без подключения django-filter)
+    # через параметры запроса
     # например, http://127.0.0.1:8000/api/project/?name=1
     # def get_queryset(self):
     #     project_name = self.request.query_params.get('name')
