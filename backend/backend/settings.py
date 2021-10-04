@@ -59,7 +59,10 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 100,
     # подключение библиотеки django-filter
     'DEFAULT_FILTER_BACKENDS':
-        ['django_filters.rest_framework.DjangoFilterBackend']
+        ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
 }
 
 CORS_ALLOWED_ORIGINS = [
