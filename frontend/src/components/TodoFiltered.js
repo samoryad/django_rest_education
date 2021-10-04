@@ -24,17 +24,10 @@ const TodoItem = ({todo}) => {
 
 const ToDoFilteredList = ({todos}) => {
     let { name } = useParams()
-    //TODO не пойму, почему даже консоль.лог не выводит ничего, не разобрался
-    //но сидел очень долго. По логике вроде всё верно. может синтаксис
-    //не правильный или ещё что-то... объясните пожалуйста
-    console.log(name)
-    console.log(todos)
+    // console.log(name)
+    // console.log(todos)
     let filtered_todos = todos.filter((todo) => todo.project === name);
-    console.log(filtered_todos)
-
-    // return (
-    //     <div>Отображается {name}</div>
-    // )
+    // console.log(filtered_todos)
 
     return (
         <table className="table">

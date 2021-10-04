@@ -92,7 +92,7 @@ class App extends React.Component {
                         <Route exact path='/projects' component={() => <ProjectList projects = {this.state.projects} />}  />
                         <Route exact path='/todos' component={() => <TodoList todos = {this.state.todos} />}  />
                         <Redirect from='/users' to='/' />
-                        <Route exact path='/projects/:name' component={() => <ToDoFilteredList todos = {this.state.todos} />}  />
+                        <Route exact path='/project/:name' component={() => <ToDoFilteredList todos = {this.state.todos} />}  />
                         <Route component={NotFound404} />
                         {/*<UserList users = {this.state.users}/>*/}
                     </Switch>
