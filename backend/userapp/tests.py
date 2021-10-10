@@ -1,6 +1,6 @@
 from mixer.backend.django import mixer
 from rest_framework import status
-from rest_framework.test import APIClient, APIRequestFactory, APITestCase, \
+from rest_framework.test import APIRequestFactory, APITestCase, \
     force_authenticate, APISimpleTestCase
 
 from todoapp.models import ToDo
@@ -18,11 +18,9 @@ class MixerTestCase(APITestCase):
 
     def test_mixer(self):
         user = mixer.blend(ToDoUser, first_name='Gogi')
-        print(user)
         todo_notice = mixer.blend(ToDo, user__first_name='Gogi')
-        print(todo_notice)
-        todo_user = ToDoUser.objects.get(id=todo_notice.user.id)
-        print(todo_user.first_name)
+        # todo_user = ToDoUser.objects.get(id=todo_notice.user.id)
+        # print(todo_user.first_name)
         response = self.client.get(f'/api/users/{user.id}/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
