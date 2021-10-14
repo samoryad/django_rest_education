@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from rest_framework.authtoken.views import obtain_auth_token
 from rest_framework.routers import DefaultRouter
 from library.views import AuthorViewSet
@@ -29,7 +29,20 @@ router.register('todo', ToDoModelViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    # для URLPathVersioning
+    # re_path('^api/(?P<version>V\d)/users/$',
+    #         ToDoUserViewSet.as_view({'get': 'list'})),
+    # re_path('^api/users/$',
+    #         ToDoUserViewSet.as_view({'get': 'list'})),
+
+    # для NamespaceVersioning
+    path('api/users/V1', include('userapp.urls', namespace='V1')),
+    path('api/users/V2', include('userapp.urls', namespace='V2')),
+
+
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
     path('api-token-auth/', obtain_auth_token),
+
 ]

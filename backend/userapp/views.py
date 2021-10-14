@@ -5,7 +5,8 @@ from rest_framework.mixins import UpdateModelMixin, ListModelMixin, \
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from .models import ToDoUser
-from .serializers import UserModelSerializer
+from .serializers import UserModelSerializerV1, UserModelSerializerV2, \
+    UserModelSerializer
 
 
 # # viewset для отображения всех операций, GET, POST, UPDATE, DELETE
@@ -25,6 +26,13 @@ class ToDoUserViewSet(
     """
     queryset = ToDoUser.objects.all()
     serializer_class = UserModelSerializer
+
+    # при использовании разных версий выбираем версию при помощи:
+    def get_serializer_class(self):
+        print(self.request.version)
+        if self.request.version == 'V2':
+            return UserModelSerializerV2
+        return UserModelSerializerV1
 
     # позволяет создать для конкретного юзера дополнительный метод вывода
     # username, например http://127.0.0.1:8000/api/users/2/username/
