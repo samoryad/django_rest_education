@@ -30,15 +30,26 @@ router.register('users', ToDoUserViewSet)
 router.register('project', ProjectModelViewSet)
 router.register('todo', ToDoModelViewSet)
 
-schema_view = get_schema_view(
+schema_view_users = get_schema_view(
     openapi.Info(
         title='userapp',
         default_version='V1',
-        description='description'
+        description='schema-view-users'
     ),
     public=True,
     permission_classes=[AllowAny]
 )
+
+schema_view_todo = get_schema_view(
+    openapi.Info(
+        title='todoapp',
+        default_version='V1',
+        description='schema-view-todo'
+    ),
+    public=True,
+    permission_classes=[AllowAny]
+)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -57,11 +68,31 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
     path('api-token-auth/', obtain_auth_token),
-    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0)),
+
     path(
-        'redoc/',
-        schema_view.with_ui(
+        'swagger_users/',
+        schema_view_users.with_ui(
+            'swagger',
+            cache_timeout=0),
+        name='schema-users-swagger'),
+
+    path(
+        'redoc_users/',
+        schema_view_users.with_ui(
             'redoc',
             cache_timeout=0),
-        name='schema-redoc'),
+        name='schema-users-redoc'),
+
+    path(
+        'swagger_todo/',
+        schema_view_todo.with_ui(
+            'swagger',
+            cache_timeout=0),
+        name='schema-todo-swagger'),
+
+    re_path(
+        r'^swagger_todos(?P<format>\.json|\.yaml)$',
+        schema_view_todo.without_ui(
+            cache_timeout=0),
+        name='schema-todo-json/yaml'),
 ]
