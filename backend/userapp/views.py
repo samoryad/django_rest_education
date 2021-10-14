@@ -29,7 +29,7 @@ class ToDoUserViewSet(
 
     # при использовании разных версий выбираем версию при помощи:
     def get_serializer_class(self):
-        print(self.request.version)
+        # print(self.request.version)
         if self.request.version == 'V2':
             return UserModelSerializerV2
         return UserModelSerializerV1
