@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
+    'drf_yasg',
     'library',
     'userapp',
     'todoapp',
@@ -62,13 +63,29 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS':
         ['django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_PERMISSION_CLASSES': [
-        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
-        'rest_framework.permissions.IsAuthenticated'
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        # 'rest_framework.permissions.IsAuthenticated'
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
-    ]
+    ],
+
+    # http://127.0.0.1:8000/api/V2/users
+    # 'DEFAULT_VERSIONING_CLASS':
+    #     'rest_framework.versioning.URLPathVersioning',
+
+    # http://127.0.0.1:8000/api/users/V2
+    # 'DEFAULT_VERSIONING_CLASS':
+    #     'rest_framework.versioning.NamespaceVersioning',
+
+    # http://127.0.0.1:8000/api/users/?version=V2
+    'DEFAULT_VERSIONING_CLASS':
+        'rest_framework.versioning.QueryParameterVersioning',
+
+    # http://127.0.0.1:8000/api/users/
+    # 'DEFAULT_VERSIONING_CLASS':
+    #     'rest_framework.versioning.AcceptHeaderVersioning',
 }
 
 CORS_ALLOWED_ORIGINS = [
