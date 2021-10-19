@@ -31,6 +31,9 @@ class Query(graphene.ObjectType):
     notices_by_username = graphene.List(
         ToDoType, name=graphene.String(
             required=False))
+    project_by_users = graphene.List(
+        ProjectType, name=graphene.String(required=False)
+    )
 
     def resolve_all_users(self, info):
         return ToDoUser.objects.all()
@@ -53,5 +56,72 @@ class Query(graphene.ObjectType):
             notices = notices.filter(user__username=name)
         return notices
 
+    def resolve_project_by_users(self, info, name=None):
+        project = Project.objects.all()
+        if id:
+            project = project.filter(users__username=name)
+        return project
 
-schema = graphene.Schema(query=Query)
+
+class UserCreateMutation(graphene.Mutation):
+    class Arguments:
+        username = graphene.String(required=True)
+        first_name = graphene.String(required=True)
+        last_name = graphene.String(required=True)
+        email = graphene.String(required=True)
+
+    user = graphene.Field(UserType)
+
+    @classmethod
+    def mutate(cls, root, info, username, first_name, last_name, email):
+        user = ToDoUser(
+            username=username,
+            first_name=first_name,
+            last_name=last_name,
+            email=email)
+        user.save()
+        return UserCreateMutation(user)
+
+
+class UserUpdateMutation(graphene.Mutation):
+    class Arguments:
+        id = graphene.ID()
+        username = graphene.String(required=True)
+
+    user = graphene.Field(UserType)
+
+    @classmethod
+    def mutate(cls, root, info, id, username):
+        user = ToDoUser.objects.get(id=id)
+        user.username = username
+        user.save()
+        return UserUpdateMutation(user)
+
+
+class Mutation(graphene.ObjectType):
+    create_user = UserCreateMutation.Field()
+    update_user = UserUpdateMutation.Field()
+
+
+class ToDoUpdateMutation(graphene.Mutation):
+    class Arguments:
+        id = graphene.ID()
+        text = graphene.String(required=True)
+
+    notice = graphene.Field(ToDoType)
+
+    @classmethod
+    def mutate(cls, root, info, id, text):
+        notice = ToDo.objects.get(id=id)
+        notice.text = text
+        notice.save()
+        return UserUpdateMutation(notice)
+
+
+class Mutation(graphene.ObjectType):
+    create_user = UserCreateMutation.Field()
+    update_user = UserUpdateMutation.Field()
+    update_todo_text = ToDoUpdateMutation.Field()
+
+
+schema = graphene.Schema(query=Query, mutation=Mutation)
