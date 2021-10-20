@@ -66,6 +66,10 @@ class App extends React.Component {
         return {}
     }
 
+    deleteProject(name){
+        console.log(name)
+    }
+
     loadData(){
         const headers = this.getHeaders()
 
@@ -169,7 +173,7 @@ class App extends React.Component {
                     <Switch>
                         <Route exact path='/authors' component={() => <AuthorList authors= {this.state.users} />}  />
                         <Route exact path='/' component={() => <UserList users = {this.state.users} />}  />
-                        <Route exact path='/projects' component={() => <ProjectList projects = {this.state.projects} />}  />
+                        <Route exact path='/projects' component={() => <ProjectList projects = {this.state.projects} deleteProject = {(name) => this.deleteProject(name)}/>}  />
                         <Route exact path='/todos' component={() => <TodoList todos = {this.state.todos} />}  />
                         <Redirect from='/users' to='/' />
                         <Route exact path='/project/:name' component={() => <ToDoFilteredList todos = {this.state.todos} />}  />
