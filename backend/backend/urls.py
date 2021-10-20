@@ -29,7 +29,7 @@ from userapp.views import ToDoUserViewSet
 router = DefaultRouter()
 router.register('authors', AuthorViewSet)
 router.register('users', ToDoUserViewSet)
-router.register('project', ProjectModelViewSet)
+router.register('projects', ProjectModelViewSet)
 router.register('todo', ToDoModelViewSet)
 
 schema_view_users = get_schema_view(

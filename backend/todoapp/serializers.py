@@ -23,7 +23,7 @@ class ProjectSerializer(ModelSerializer):
 
     class Meta:
         model = Project
-        fields = ['name', 'link', 'users']
+        fields = ['id', 'name', 'link', 'users']
 
 
 class ToDoSerializer(ModelSerializer):
@@ -35,6 +35,7 @@ class ToDoSerializer(ModelSerializer):
     class Meta:
         model = ToDo
         fields = [
+            'id',
             'project',
             'text',
             'created_date',

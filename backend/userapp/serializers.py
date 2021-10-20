@@ -13,7 +13,7 @@ class UserModelSerializerV1(ModelSerializer):
     """сериализатор для пользователя ToDoUser V1"""
     class Meta:
         model = ToDoUser
-        fields = ('username', 'first_name', 'last_name', 'email')
+        fields = ('id', 'username', 'first_name', 'last_name', 'email')
 
 
 class UserModelSerializerV2(ModelSerializer):
@@ -21,6 +21,7 @@ class UserModelSerializerV2(ModelSerializer):
     class Meta:
         model = ToDoUser
         fields = (
+            'id',
             'username',
             'first_name',
             'last_name',
