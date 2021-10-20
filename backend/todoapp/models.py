@@ -10,7 +10,8 @@ class Project(models.Model):
         unique=True)
     link = models.CharField(
         max_length=128,
-        verbose_name='ссылка на репозиторий')
+        verbose_name='ссылка на репозиторий',
+        blank=True)
     users = models.ManyToManyField(ToDoUser, verbose_name='пользователи')
 
 

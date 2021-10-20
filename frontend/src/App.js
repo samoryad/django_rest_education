@@ -16,6 +16,7 @@ import AuthorList from "./components/Authors";
 import TodoList from "./components/TodoNotices";
 import ToDoFilteredList from "./components/TodoFiltered";
 import LoginForm from "./components/LoginForm";
+import ProjectForm from "./components/ProjectForm";
 
 const NotFound404 = ({ location }) => {
   return (
@@ -66,10 +67,22 @@ class App extends React.Component {
         return {}
     }
 
+    createProject(name, users) {
+        const headers = this.getHeaders()
+        console.log(name, users)
+        axios.post('http://127.0.0.1:8000/api/projects/', {name: name, users: users}, {headers})
+        .then(response => {
+            this.loadData()
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
+
     deleteProject(id){
         const headers = this.getHeaders()
         console.log(id)
-        axios.delete(`http://127.0.0.1:8000/api/project/${id}/`, {headers})
+        axios.delete(`http://127.0.0.1:8000/api/projects/${id}/`, {headers})
         .then(response => {
             this.setState(
                 {
@@ -172,6 +185,9 @@ class App extends React.Component {
                                 <Link to='/projects'>Projects</Link>
                             </li>
                             <li>
+                                <Link to='/project/create'>Create Project</Link>
+                            </li>
+                            <li>
                                 <Link to='/todos'>Todo</Link>
                             </li>
                             <li>
@@ -186,6 +202,7 @@ class App extends React.Component {
                         <Route exact path='/authors' component={() => <AuthorList authors= {this.state.users} />}  />
                         <Route exact path='/' component={() => <UserList users = {this.state.users} />}  />
                         <Route exact path='/projects' component={() => <ProjectList projects = {this.state.projects} deleteProject = {(id) => this.deleteProject(id)}/>}  />
+                        <Route exact path='/project/create' component={() => <ProjectForm users = {this.state.users} createProject = {(name, users) => this.createProject(name, users)}/>}  />
                         <Route exact path='/todos' component={() => <TodoList todos = {this.state.todos} />}  />
                         <Redirect from='/users' to='/' />
                         <Route exact path='/project/:name' component={() => <ToDoFilteredList todos = {this.state.todos} />}  />

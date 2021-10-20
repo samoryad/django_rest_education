@@ -6,7 +6,7 @@ const ProjectItem = ({project, deleteProject}) => {
        <tr>
            <td>
                {/*{project.name}*/}
-               <Link to={`project/${project.name}`}>{project.name}</Link>
+               <Link to={`project/${project.id}`}>{project.name}</Link>
            </td>
            <td>
                {project.link}
