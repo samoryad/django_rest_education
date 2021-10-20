@@ -29,7 +29,7 @@ class ProjectSerializer(ModelSerializer):
 class ToDoSerializer(ModelSerializer):
     """сериализатор для заметок"""
     project = SlugRelatedField(queryset=Project.objects.all(),
-                               slug_field='name')
+                               slug_field='id')
     # user = PrimaryKeyRelatedField(queryset=ToDoUser.objects.all())
 
     class Meta:

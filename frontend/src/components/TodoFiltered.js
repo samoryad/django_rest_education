@@ -26,7 +26,7 @@ const ToDoFilteredList = ({todos}) => {
     let { id } = useParams()
     // console.log(id)
     // console.log(todos)
-    let filtered_todos = todos.filter((todo) => todo.project.id === id);
+    let filtered_todos = todos.filter((todo) => todo.project === +id);
     // console.log(filtered_todos)
 
     return (
