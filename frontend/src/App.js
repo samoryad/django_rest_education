@@ -112,12 +112,8 @@ class App extends React.Component {
         const headers = this.getHeaders()
         // console.log(id)
         axios.delete(`http://127.0.0.1:8000/api/todo/${id}/`, {headers})
-        .then(response => {
-            this.setState(
-                {
-                    'todo': this.state.projects.filter((todo) => todo.id !== id)
-                }
-            )
+         .then(response => {
+            this.loadData()
         })
         .catch(error => {
             console.log(error)
@@ -178,9 +174,10 @@ class App extends React.Component {
         axios.get('http://127.0.0.1:8000/api/todo/', {headers})
             .then(response => {
                 const todos = response.data
+                // console.log(todos)
                 this.setState(
                     {
-                        'todos': todos.results
+                        'todos': todos.results.filter((todo) => todo.is_active !== false)
                     }
                 )
             })
