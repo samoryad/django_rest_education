@@ -1,4 +1,5 @@
 import React from "react";
+import {withRouter} from 'react-router-dom';
 
 
 class LoginForm extends React.Component {
@@ -19,6 +20,7 @@ class LoginForm extends React.Component {
     handleSubmit(event){
         this.props.getToken(this.state.login, this.state.password)
         event.preventDefault()
+        this.props.history.push('/todos')
     }
 
     render() {
@@ -32,4 +34,4 @@ class LoginForm extends React.Component {
     }
 }
 
-export default LoginForm;
+export default withRouter(LoginForm);

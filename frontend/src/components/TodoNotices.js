@@ -1,6 +1,6 @@
 import React from "react";
 
-const TodoItem = ({todo}) => {
+const TodoItem = ({todo, deleteToDo}) => {
     return (
        <tr>
            <td>
@@ -15,11 +15,16 @@ const TodoItem = ({todo}) => {
            <td>
                {todo.user}
            </td>
+           <td>
+                <button onClick={() => deleteToDo(todo.id)}>
+                    Delete
+                </button>
+           </td>
        </tr>
    )
 }
 
-const TodoList = ({todos}) => {
+const TodoList = ({todos, deleteToDo}) => {
    return (
        <table className="table">
            <th>
@@ -34,7 +39,8 @@ const TodoList = ({todos}) => {
            <th>
                user
            </th>
-                {todos.map((map_todo) => <TodoItem todo={map_todo} />)}
+                {todos.map((map_todo) => <TodoItem todo={map_todo}
+                deleteToDo={deleteToDo}/>)}
        </table>
    )
 }

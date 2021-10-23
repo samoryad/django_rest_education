@@ -23,10 +23,10 @@ const TodoItem = ({todo}) => {
 
 
 const ToDoFilteredList = ({todos}) => {
-    let { name } = useParams()
-    // console.log(name)
+    let { id } = useParams()
+    // console.log(id)
     // console.log(todos)
-    let filtered_todos = todos.filter((todo) => todo.project === name);
+    let filtered_todos = todos.filter((todo) => todo.project === +id);
     // console.log(filtered_todos)
 
     return (

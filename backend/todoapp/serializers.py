@@ -18,26 +18,20 @@ class ProjectSerializer(ModelSerializer):
 
     users = SlugRelatedField(
         many=True,
-        slug_field='username',
+        slug_field='id',
         queryset=ToDoUser.objects.all())
 
     class Meta:
         model = Project
-        fields = ['name', 'link', 'users']
+        fields = '__all__'
 
 
 class ToDoSerializer(ModelSerializer):
     """сериализатор для заметок"""
     project = SlugRelatedField(queryset=Project.objects.all(),
-                               slug_field='name')
+                               slug_field='id')
     # user = PrimaryKeyRelatedField(queryset=ToDoUser.objects.all())
 
     class Meta:
         model = ToDo
-        fields = [
-            'project',
-            'text',
-            'created_date',
-            'updated_date',
-            'user',
-            'is_active']
+        fields = '__all__'
