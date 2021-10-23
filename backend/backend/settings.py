@@ -68,7 +68,11 @@ REST_FRAMEWORK = {
         # 'rest_framework.permissions.IsAuthenticated'
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',
+        # не работает аутентификация из-за бага (ошибка токена csrf), поэтому
+        # добавили auth.py в backend и переопределили enforce_csrf,
+        # поэтому поменяли на кастом аутентификацию
+        # 'rest_framework.authentication.SessionAuthentication',
+        'backend.auth.CustomSessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     ],
 
@@ -92,6 +96,8 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'http://127.0.0.1:3000',
+
+    # для сборки через serve -s build
     'http://127.0.0.1:5000',
     'http://localhost:5000',
 ]
