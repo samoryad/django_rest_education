@@ -1,4 +1,5 @@
 import React from "react";
+import {withRouter} from 'react-router-dom';
 
 
 class ToDoForm extends React.Component {
@@ -45,6 +46,7 @@ class ToDoForm extends React.Component {
         // console.log(this.state.project, this.state.text, this.state.user)
         this.props.createToDoNotice(this.state.project, this.state.text, this.state.user)
         event.preventDefault()
+        this.props.history.push('/todos')
     }
 
     render() {
@@ -63,4 +65,4 @@ class ToDoForm extends React.Component {
     }
 }
 
-export default ToDoForm;
+export default withRouter(ToDoForm);
