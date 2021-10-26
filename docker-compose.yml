@@ -22,3 +22,10 @@ services:
       "
     depends_on:
       - db
+
+  nginx:
+    build: ./nginx
+    ports:
+      - 8000:80
+    depends_on:
+      - backend
