@@ -147,8 +147,10 @@ DATABASES = {
         'NAME': 'todo',
         'USER': 'gogi',
         'PASSWORD': 'qwerty',
-        'HOST': '192.168.0.14',
-        'PORT': '24322'
+        'HOST': 'db',
+        'PORT': '5432',
+        # 'HOST': '127.0.0.1',
+        # 'PORT': '24322'
     }
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
